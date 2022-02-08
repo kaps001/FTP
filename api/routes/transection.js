@@ -12,10 +12,10 @@ const mongoose = require('mongoose');
 
 router.post('/', (req, res, next) => {
       
-res.header("Access-Control-Allow-Origin", "*");
+/*res.header("Access-Control-Allow-Origin", "*");
 res.header("Access-Control-Allow-Credentials", "true");
-res.header("Access-Control-Allow-Methods", "GET,HEAD,OPTIONS,POST,PUT");
-res.header("Access-Control-Allow-Headers", "Access-Control-Allow-Headers, Origin,Accept, X-Requested-With, Content-Type, Access-Control-Request-Method, Access-Control-Request-Headers");
+ res.header('Access-Control-Allow-Methods', 'GET,PUT,POST,DELETE,PATCH,OPTIONS');
+res.header("Access-Control-Allow-Headers", "Access-Control-Allow-Headers, Origin,Accept, X-Requested-With, Content-Type, Access-Control-Request-Method, Access-Control-Request-Headers");*/
     var today = new Date();
     var dd = today.getDate();
     var mm = today.getMonth() + 1;
@@ -63,14 +63,14 @@ res.header("Access-Control-Allow-Headers", "Access-Control-Allow-Headers, Origin
             });
             transection.save().then(result => {
                 res.status(200).json({
-                    message: "transection has been submitted",
+                    message: "Amount has been credited.",
                     new_transection: result
                 });
             })
                 .catch(err => {
                     console.log(err);
                     res.status(500).json({
-                        message: "Something is wrong so please try again",
+                        message: "Something is wrong so please try again.",
                         error: err
                     });
                 });
@@ -89,12 +89,12 @@ res.header("Access-Control-Allow-Headers", "Access-Control-Allow-Headers, Origin
                 creditAmount = result.total_credit_amount;
                 if (runningBalance < req.body.amount) {
                     return res.status(400).json({
-                        message: "you are not eligable for debit with this Amount because amount is greeter then credit amount"
+                        message: "you are not eligable for debit with this Amount because amount is greeter then credit amount."
                     });
                 }
                 if (runningBalance == 0) {
                     return res.status(400).json({
-                        message: "you are not eligable for debit with this Amount because no amount in walet"
+                        message: "you are not eligable for debit with this Amount because no amount in walet."
                     });
                 }
                 _id = result._id;
@@ -113,20 +113,20 @@ res.header("Access-Control-Allow-Headers", "Access-Control-Allow-Headers, Origin
                 });
                 transection.save().then(result => {
                     return res.status(200).json({
-                        message: "transection has been submitted",
+                        message: "Amount has been debited from Account.",
                         new_transection: result
                     });
                 })
                     .catch(err => {
                         //console.log(err);
                         return res.status(500).json({
-                            message: "Something is wrong so please try again",
+                            message: "Something is wrong so please try again.",
                             error: err
                         });
                     });
             } else {
                 res.status(400).json({
-                    message: "No any debit amount because you balance is zero"
+                    message: "No any debit amount because you balance is zero."
                 });
             }
         });
@@ -144,7 +144,7 @@ router.get('/', (req, res, next) => {
     Transection.find().sort({createdAt: -1}).exec((err, data) => {
      if (data != null) {
             return res.status(200).json({
-                message: "your all transection data",
+                message: "your all transection data.",
                 data: data
             });
         }

@@ -1,6 +1,7 @@
 const express = require('express');
 const app = express();
 const mongoose = require('mongoose');
+var cors= require('cors');
 const studentRoute = require('./api/routes/student');
 const facultyRoute = require('./api/routes/faculty');
 const transectionRoute = require('./api/routes/transection');
@@ -8,6 +9,7 @@ const bodyParser = require('body-parser');
 
 app.use(bodyParser.urlencoded({extended:false}));
 app.use(bodyParser.json());
+app.use(cors());
 /**
  * define the routes
  */
