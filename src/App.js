@@ -1,25 +1,34 @@
-import logo from './logo.svg';
-import './App.css';
+import "./App.css";
+import Footer from "./MyComponent/Footer";
+import TransectionList from "./MyComponent/TransectionList";
+import AddTransection from "./MyComponent/AddTransection";
+import { BrowserRouter as Router, Link, Route, Routes } from "react-router-dom";
 
 function App() {
+  let styles = {
+    marginRight: "1615px",
+  };
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
+    <div>
+      <Router>
+        <Link
+          to="/"
+          style={styles}
+          className="btn btn-outline-success"
         >
-          Learn React
-        </a>
-      </header>
+           Transection List
+        </Link>
+        <Link to="/add-transection" className="btn btn-outline-success">
+        Add Transection
+        </Link>
+
+        <Routes>
+          <Route path="/add-transection" element={<AddTransection />}></Route>
+          <Route exact path="/" element={<TransectionList />}></Route>
+        </Routes>
+      </Router>
+      <Footer />
     </div>
   );
 }
-
 export default App;
